@@ -1,0 +1,37 @@
+# Business Bangerz affiliate landing page — FastComet / Apache
+# Safe to upload as-is. Delete any block your host rejects; none of it is required
+# for the page to render, all of it makes the page faster or tidier.
+
+DirectoryIndex index.php index.html
+
+# Never serve the config or the includes directly.
+<FilesMatch "^(config)\.php$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 ^/includes/
+
+# Compress text. Images and mp3 are already compressed; leave them alone.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript image/svg+xml
+</IfModule>
+
+# Cache static assets hard — config.php cache-busts them with ?v=mtime on change.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css              "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType audio/mpeg            "access plus 1 month"
+  ExpiresByType image/png             "access plus 1 month"
+  ExpiresByType image/webp            "access plus 1 month"
+</IfModule>
+
+# Range requests are what let the seek bar jump without re-downloading the mp3.
+<IfModule mod_headers.c>
+  <FilesMatch "\.mp3$">
+    Header set Accept-Ranges bytes
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+AddType audio/mpeg .mp3
