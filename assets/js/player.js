@@ -214,9 +214,9 @@
       var y = h - bh;
 
       var g = ctx2d.createLinearGradient(0, h, 0, y);
-      g.addColorStop(0, '#3fe6d0');
-      g.addColorStop(0.55, '#8b5cf6');
-      g.addColorStop(1, '#ff4fa3');
+      g.addColorStop(0, '#a8e6cf');
+      g.addColorStop(0.55, '#c3b1f0');
+      g.addColorStop(1, '#f4a6c1');
       ctx2d.fillStyle = g;
 
       if (ctx2d.roundRect) {
