@@ -4,6 +4,21 @@ require __DIR__ . '/includes/data.php';
 require __DIR__ . '/includes/header.php';
 
 $songExists = is_file(__DIR__ . '/' . SONG_FILE);
+
+// Every mp3 in the audio folder except the hero commercial, so a new song goes live by uploading it.
+// Read defensively: a server still holding an older config.php (a string, or no constant at all)
+// otherwise dies here with a fatal error, and the page stops rendering just after the header.
+$playlistSkip = array_map('strtolower', defined('PLAYLIST_EXCLUDE') ? (array) PLAYLIST_EXCLUDE : ['commercial.mp3']);
+$playlist = [];
+foreach (glob(__DIR__ . '/assets/audio/*.mp3') ?: [] as $abs) {
+    $name = basename($abs);
+    if (in_array(strtolower($name), $playlistSkip, true)) continue;
+    $playlist[] = [
+        'src'   => v('assets/audio/' . $name),
+        'title' => ucwords(str_replace(['-', '_'], ' ', pathinfo($name, PATHINFO_FILENAME))),
+    ];
+}
+usort($playlist, function ($a, $b) { return strnatcasecmp($a['title'], $b['title']); });
 ?>
 <main id="main">
 
@@ -158,6 +173,37 @@ $songExists = is_file(__DIR__ . '/' . SONG_FILE);
     </div>
   </div>
 </section>
+
+<?php if ($playlist): ?>
+<!-- PLAYLIST -->
+<section class="sec" id="playlist">
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">One song not enough?</p>
+    <h2 class="display sec-title">HEAR MORE<br><span class="hl">BANGERS</span></h2>
+
+    <div class="mix" id="mix">
+      <audio id="mix-audio" preload="none"></audio>
+      <div class="mix-head">
+        <button id="mix-play" class="ctl ctl-main mix-play" type="button" aria-label="Play the playlist">
+          <span class="ico-play">&#9654;</span><span class="ico-pause">&#10074;&#10074;</span>
+        </button>
+        <div class="mix-meta">
+          <p class="kicker" id="mix-kicker">Press play &middot; <?= count($playlist) ?> song<?= count($playlist) === 1 ? '' : 's' ?>, back to back</p>
+          <p class="song-title" id="mix-title"><?= e($playlist[0]['title']) ?></p>
+        </div>
+      </div>
+      <div class="mix-bar"><span id="mix-progress"></span></div>
+      <ol class="mix-list">
+<?php foreach ($playlist as $i => $track): ?>
+        <li><button class="mix-track" type="button" data-src="<?= e($track['src']) ?>" data-index="<?= $i ?>">
+          <span class="mix-n"><?= $i + 1 ?></span><span class="mix-name"><?= e($track['title']) ?></span>
+        </button></li>
+<?php endforeach; ?>
+      </ol>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
 
 <!-- FAQ -->
 <section class="sec" id="faq">

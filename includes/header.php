@@ -34,6 +34,7 @@
       <a href="#player">The commercial</a>
       <a href="#why">Why it works</a>
       <a href="#uses">Use cases</a>
+      <a href="#playlist">More songs</a>
       <a href="#faq">FAQ</a>
     </nav>
     <a class="btn btn-sm btn-pink" href="<?= e(aff()) ?>" target="_blank" rel="noopener sponsored">🎵 Book a Jam Sesh</a>

@@ -13,5 +13,6 @@
   </div>
 </footer>
 <script src="<?= e(v('assets/js/player.js')) ?>" defer></script>
+<script src="<?= e(v('assets/js/playlist.js')) ?>" defer></script>
 </body>
 </html>

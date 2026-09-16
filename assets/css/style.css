@@ -429,6 +429,50 @@ h1.display { font-size: clamp(2.9rem, 7.4vw, 5.4rem); }
 .step h3 { margin: 0 0 6px; font-size: 1.15rem; }
 .step p { margin: 0; color: var(--muted); font-size: .96rem; }
 
+/* ── Playlist ─────────────────────────────────────────────────────────── */
+
+.mix {
+  background: linear-gradient(168deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: 0 40px 90px -40px #000, 0 0 70px -30px rgba(63, 230, 208, .4);
+}
+.mix-head { display: flex; align-items: center; gap: 18px; }
+.mix-play { width: 72px; height: 72px; flex: 0 0 72px; font-size: 1.3rem; }
+.mix.playing .mix-play .ico-play { display: none; }
+.mix.playing .mix-play .ico-pause { display: inline; }
+.mix-meta { min-width: 0; }
+
+.mix-bar {
+  height: 6px; margin: 18px 0 14px;
+  border-radius: 999px;
+  background: rgba(246, 245, 250, .14);
+  overflow: hidden;
+}
+.mix-bar span {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+}
+
+.mix-list { list-style: none; margin: 0; padding: 0; }
+.mix-track {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%;
+  padding: 11px 12px;
+  background: none; border: 0; border-radius: 12px;
+  color: var(--muted);
+  font: 500 .96rem var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.mix-track:hover { background: rgba(246, 245, 250, .06); color: var(--fg); }
+.mix-track:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+.mix-track[aria-current="true"] { color: var(--fg); background: rgba(63, 230, 208, .09); }
+.mix-track[aria-current="true"] .mix-n { color: var(--cyan); }
+.mix-n { width: 1.6em; flex: 0 0 auto; font-variant-numeric: tabular-nums; color: #6f6f8a; }
+
 /* ── FAQ ──────────────────────────────────────────────────────────────── */
 
 .faq {

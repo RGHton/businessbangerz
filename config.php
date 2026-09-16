@@ -24,6 +24,9 @@ define('SONG_FILE',   'assets/audio/buzz-bang-teaser.mp3');
 define('SONG_TITLE',  'Buzz Bang Teaser');
 define('SONG_ARTIST', 'A 47-second argument, sung');
 
+// The "Hear more bangers" playlist plays every other mp3 in assets/audio/. These are left out.
+define('PLAYLIST_EXCLUDE', ['commercial.mp3', 'buzz-bang-teaser.mp3']);
+
 // ---------------------------------------------------------------------------
 // 3. SITE IDENTITY
 // ---------------------------------------------------------------------------
