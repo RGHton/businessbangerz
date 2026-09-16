@@ -30,7 +30,7 @@ usort($playlist, function ($a, $b) { return strnatcasecmp($a['title'], $b['title
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <p class="eyebrow">🍔 The pitch is forty-seven seconds &middot; and it rhymes</p>
-      <h1 class="display">NOBODY HAS<br>EVER HUMMED<br><span class="hl">A SLIDE.</span></h1>
+      <h1 class="display">BLAND BUSINESS<br>INFO, MADE FUN<br><span class="hl">AND CATCHY.</span></h1>
       <p class="lede">
         Business Bangerz writes original songs for training, launches and policy rollouts &mdash;
         the stuff people forget by lunch, turned into something they quote in Slack for a week.
